@@ -22,9 +22,6 @@ public class UserController {
     @Autowired
     private RedisService redisService;
 
-    @Autowired
-    private RedisClient redisClient;
-
     @ResponseBody
     @PostMapping("/add")
     public int addUser(User user){
@@ -39,13 +36,10 @@ public class UserController {
         @RequestParam(name = "pageSize", required = false, defaultValue = "10")
                     int pageSize){
 
-        redisService.set("redis_string_test", "springboot redis test");
+        /*redisService.set("redis_string_test", "springboot redis test");
         String result = redisService.get("redis_string_test");
-        System.out.println(result);
+        System.out.println(result);*/
 
-        redisClient.set("pool_test", "pool string");
-        String poolRes = redisClient.get("pool_test");
-        System.out.println(poolRes);
         return userService.findAllUser(pageNum,pageSize);
     }
 }
