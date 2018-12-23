@@ -22,7 +22,8 @@ public class RedisPoolConfig {
     @Bean
     public JedisPool jedisPool() {
         JedisPoolConfig config = getJedisPoolConfig();
-        JedisPool jedisPool = new JedisPool(config, jedisProperties.getHost(), jedisProperties.getPort(), jedisProperties.getMaxWaitMillis(), jedisProperties.getPassword());
+        JedisPool jedisPool = new JedisPool(config, jedisProperties.getHost(), jedisProperties.getPort(),
+                jedisProperties.getMaxWaitMillis(), jedisProperties.getPassword());
         return jedisPool;
     }
 
@@ -36,7 +37,7 @@ public class RedisPoolConfig {
     @Bean
     @ConditionalOnMissingBean(RedisClient.class)
     public RedisClient redisClient(@Qualifier("jedisPool") JedisPool pool) {
-        System.out.println("初始化……Redis Client==Host={},Port={}:"  + jedisProperties.getHost() + ":" + jedisProperties.getPort());
+//        System.out.println("初始化……Redis Client==Host={},Port={}:"  + jedisProperties.getHost() + ":" + jedisProperties.getPort());
         RedisClient redisClient = new RedisClient();
         redisClient.setJedisPool(pool);
         return redisClient;
